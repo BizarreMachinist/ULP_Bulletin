@@ -15,4 +15,20 @@ pico_enable_stdio_usb(rush_display 1)
 
 pico_add_extra_outputs(rush_display)
 
-target_link_libraries(rush_display pico_stdlib)
+add_subdirectory(
+	lib/EPD_board
+)
+
+target_link_libraries(rush_display PUBLIC
+	pico_stdlib
+	hardware_spi
+	EPD_board
+	)
+
+pico_enable_stdio_usb(rush_display 1)
+pico_enable_stdio_uart(rush_display 0)
+
+# target_include_directories(rush_display PUBLIC
+# 	"${PROJECT_BINARY_DIR}"
+# 	"${PROJECT_SOURCE_DIR}/lib/EPD_board"
+# )
